@@ -1,0 +1,40 @@
+.nav{
+    background-color: rgba(240, 240, 240, 0.9);
+    height:40px;
+    padding:5px 10%;
+        display: flex;
+     align-items: center;
+}
+.nav h5 span{
+    margin-left: 45px;
+    color:#666;
+}
+.nav .title{
+    font-size:22px;
+    font-weight:600;
+    color:#333;
+}
+.nav h5 {
+   display:inline;
+}
+
+.nav2{
+    background-color: rgba(0, 0, 0, 0.86);;
+    height:80px;
+    width:100%;
+    display: flex;
+    justify-content: center;
+     align-items: center;
+}
+.nav2 h5 span{
+    margin: 20px;
+    color:whitesmoke;
+}
+
+.footer{
+    background-color: rgba(240, 240, 240, 0.9);
+    height:250px;
+    padding:5px 10%;
+        display: flex;
+     align-items: center;
+}

@@ -1,0 +1,5 @@
+<div>
+  <span *ngFor='let star of starsTotal; let i = index;' [class.active]='hoveringIndex >= i' [class.point]='editable'
+  [style.color]='star.color' (mouseout)='mouseOut()' 
+  (mouseover)='mouseOver(i)' >&#9733;</span>
+</div>

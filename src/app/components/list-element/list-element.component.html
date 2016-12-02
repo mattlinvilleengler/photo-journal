@@ -1,0 +1,36 @@
+<div class='list-element'>
+	<img src={{photo.url}} (click)='detail = true;'>
+	<h5 class='title '>{{photo.title.length > 0 ? photo.title : 'Untitled' }}</h5>
+	<app-stars class='stars fR' [editable]=false [stars]='photo.rating'></app-stars>
+	<div class='comment fL'>
+		<h5>{{photo.notes.length === 1 ? photo.notes.length + ' Note' : photo.notes.length + ' Notes' }}</h5>
+	</div>
+</div>
+
+<div class='detail' *ngIf='detail'>
+	<img src={{photo.url}} (click)='detail = false;'>
+	<div class="info">
+		<h5 class='title fL'>{{photo.title.length > 0 ? photo.title : 'Untitled' }}</h5>
+		<app-stars class='stars fR' [editable]=true [stars]='photo.rating'></app-stars>
+        <h5 class="addNote">Add Note</h5>
+		<div class='comment ' *ngFor="let note of photo.notes">
+            <hr>
+			<h5>{{note.text}}</h5>
+			<h6 class='fL'>{{note.localDate}}</h6>
+            <h6 class='delete'>Remove</h6>
+		</div>
+	</div>
+</div>
+
+
+
+<!--
+
+    {
+      "url": "https://source.unsplash.com/7YfY61ILEwg/",
+      "title": "The Deadliest Frog",
+      "notes": [{ "timestamp": 1476946800000, "text": "Spotted in the forest." }, { "timestamp": 1477292400000, "text": "I think these are native to Columbia." }, { "timestamp": 1477378800000, "text": "This is a golden poison frog and should never be touched." }],
+      "rating": 1
+    },
+
+    -->

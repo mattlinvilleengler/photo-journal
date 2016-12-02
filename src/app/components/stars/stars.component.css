@@ -1,0 +1,9 @@
+span{
+    margin: 0 2px;
+}
+.point{
+cursor:pointer;
+}
+.active{
+    color: #0070c9!important;
+}
