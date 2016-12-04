@@ -1,6 +1,17 @@
-<div style="margin:2% 10%;">
-	<div class="list" >
-		<app-list-element class="list-element" *ngFor="let photo of photos" [photo]=photo [list]='list'></app-list-element>
+<div class="list">
+	<div class="description boxWidth">
+		<h3>Photo</h3>
+		<h1>Journal</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+			non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+	</div>
+
+	<div class="sortedPhotos boxWidth" *ngFor="let sorted of sortedPhotos; let i = index" [class.dNone]='sorted.length < 1' 
+	[class.wide]="i === sortedPhotos.length">
+		<h1>{{ sorted.length > 0 ? rating[sorted[0].rating] : "" }}</h1>
+		<app-list-element (detailView)="createDetail($event)" class="list-element" *ngFor="let photo of sorted" [photo]=photo></app-list-element>
 	</div>
 </div>
-<div class="mask"></div>

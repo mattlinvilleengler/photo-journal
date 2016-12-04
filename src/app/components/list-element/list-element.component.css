@@ -14,6 +14,8 @@
 .list-element img {
     height:auto;
     width: 100%;
+    cursor: pointer;
+    border-radius:2px;
 }
 .list-element .title{
     margin:5px 0;
@@ -28,68 +30,9 @@
     cursor: pointer;
     display: inline;
 }
-img{
-    cursor: pointer;
-    border-radius:2px;
-}
 
 
 
-.detail{
-    position: absolute;
-    top:50px;
-    left:25%;
-    height:auto;
-    width:50%;
-    background-color: white;
-    border-radius:2px;
-}
-.detail h5{
-    margin-top:5px;
-}
-.detail .fL{
-    float:left;
-}
-.detail .fR{
-    float:right;
-}
-
-.detail img {
-    height:auto;
-    width: 100%;
-}
-.detail .title{
-    margin:0 0 10px 0;
-    max-width: 90%;
-    color: #333;
-    font-size:22px;
-    display: inline;
-}
-.detail .stars{
-    display: inline;
-}
-.detail .addNote{
-    color: #0070c9;
-    cursor: pointer;
-    clear:both;
-}
-.detail .comment{
-    color: #666;
-    clear:both;
-    margin:10px 0 20px 0;
-}
-.detail .comment h5,h6{
- margin: 3px 0px;
-}
-.detail .comment .delete{
-float:right;
-color:maroon;
-}
-.detail .info{
-    padding:25px;
-    padding-top:10px;
-    min-height:55px;
-}
 
 
 

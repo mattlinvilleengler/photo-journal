@@ -1,27 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input  } from '@angular/core';
 import { ListElementComponent } from '../list-element/list-element.component';
-import { PhotoJournalService  } from '../../services/photo-journal-service.service';
+
 
 @Component({
   selector: 'app-photo-list',
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css'],
-  providers: [ PhotoJournalService, ListElementComponent ]
+  providers: [  ListElementComponent ]
 })
 export class PhotoListComponent implements OnInit {
-  photos: any[];
-  list: boolean = true;
-  constructor(private PhotoJournalService: PhotoJournalService) { 
+  @Output() detailView = new EventEmitter();
+  @Input('sortedPhotos') sortedPhotos: any[];
+  rating: {} = {
+    0: "Unrated Photos",
+    1: "1 Star Photos",
+    2: "2 Star Photos",
+    3: "3 Star Photos",
+    4: "4 Star Photos",
+    5: "5 Star Photos"
   }
-
   ngOnInit() {
-    this.photos = this.PhotoJournalService.getPhotos();
   }
-  filterAscending(){
-    this.photos = this.PhotoJournalService.sortPhotosAscending(this.photos);    
-  }
-   filterDescending(){
-    this.photos = this.PhotoJournalService.sortPhotosDescending(this.photos);    
+   createDetail(photo){
+    this.detailView.emit(photo);
   }
 
 }

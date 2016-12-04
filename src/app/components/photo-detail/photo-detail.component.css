@@ -1,0 +1,124 @@
+
+.mask{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    background-color: rgba(0,0,0, .25);
+    display:block;
+}
+.detailHolderWidth{
+    width:90%!important;
+}
+
+@media (min-width: 900px){
+ .detailHolderWidth{
+    width:75%!important; 
+}
+}
+@media (min-width: 1000px){
+ .detailHolderWidth{
+    width:45%!important; 
+}
+.mask{
+    display:none;
+}
+}
+@media (min-width: 1200px){
+ .detailHolderWidth{
+    width:35%!important; 
+}
+.mask{
+    display:none;
+}
+}
+
+
+.detailHolder{
+    position: fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:0%;
+    background-color: white;
+    border-radius:2px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition-duration: .15s;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.fullScreen{
+    width:100%;
+}
+.toolbar{
+    height:40px;
+    width:90%;
+    padding:5px 5%;
+    background-color: rgba(240, 240, 240, 0.9);
+}
+.toolbar h5{
+    cursor: pointer;
+    color: #0070c9;
+    display:inline;
+    margin:10px;
+    float:right;
+}
+.detail{
+    position: relative;
+    top:20px;
+    left:5%;
+    height:auto;
+    width:90%;
+    background-color: white;
+    border-radius:2px;
+}
+.detail h5{
+    margin-top:5px;
+}
+.detail .fL{
+    float:left;
+}
+.detail .fR{
+    float:right;
+}
+
+.detail img {
+    height:auto;
+    width: 100%;
+    border-radius:2px;
+}
+.detail .title{
+    margin:0 0 10px 0;
+    max-width: 90%;
+    color: #333;
+    font-size:22px;
+    display: inline;
+}
+.detail .stars{
+    display: inline;
+}
+.detail .addNote{
+    color: #0070c9;
+    cursor: pointer;
+    clear:both;
+}
+.detail .comment{
+    color: #666;
+    clear:both;
+    margin:10px 0 20px 0;
+}
+.detail .comment h5,h6{
+ margin: 3px 0px;
+}
+.detail .comment .delete{
+float:right;
+color:maroon;
+cursor: pointer;
+}
+.detail .info{
+    padding:10px 2px 25px 2px;
+    padding-top:10px;
+    min-height:55px;
+}

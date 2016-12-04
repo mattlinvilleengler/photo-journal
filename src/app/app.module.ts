@@ -8,6 +8,7 @@ import {  PhotoListComponent } from './components/photo-list/photo-list.componen
 import {  ListElementComponent } from './components/list-element/list-element.component';
 import { PhotoJournalService  } from './services/photo-journal-service.service';
 import { StarsComponent } from './components/stars/stars.component';
+import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 
 
 
@@ -16,7 +17,8 @@ import { StarsComponent } from './components/stars/stars.component';
     AppComponent,
     PhotoListComponent,
     ListElementComponent,
-    StarsComponent
+    StarsComponent,
+    PhotoDetailComponent
   ],
   imports: [
     BrowserModule,

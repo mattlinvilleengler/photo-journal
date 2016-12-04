@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StarsComponent } from '../stars/stars.component';
 
 @Component({
@@ -9,10 +9,8 @@ import { StarsComponent } from '../stars/stars.component';
 })
 export class ListElementComponent implements OnInit {
   @Input('photo') photo: any;
-  @Input('list') list: boolean;
-  detail:boolean =false;
+  @Output() detailView = new EventEmitter();
   
-
   constructor() { }
 
   ngOnInit() {
@@ -21,6 +19,9 @@ export class ListElementComponent implements OnInit {
         n.localDate = new Date(n.timestamp).toLocaleDateString();
       })
     }
+  }
+  createDetail(photo){
+    this.detailView.emit(photo);
   }
 
 }

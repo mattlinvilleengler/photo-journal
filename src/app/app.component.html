@@ -1,23 +1,27 @@
-<!-- NAV -->
-<div class='nav'>
-    <h5 class="title">
-        Photo Journal
-    </h5>
-    <h5 style="float:right;">
-        <span>Search</span>   
-    </h5>
-</div>
-<div class='nav2'>
-    <h5 >
-        <span>Rating Up</span> 
-        <span>Rating Down</span> 
-        <span>Rated</span>     
-        <span>Unrated</span>   
-        <span>Show All</span>   
-        
-    </h5>
-</div>
-<!-- Main -->
-<app-photo-list style="margin: 0 10%;"></app-photo-list>
-<!-- Footer -->
-<div class='footer'></div>
+
+	<div class="container" [class.detailView]='detail'>
+		<!-- NAV -->
+		<nav class='nav'>
+			<h5 class="title">
+				Photo Journal
+			</h5>
+			<h5 style="float:right;">
+				<span>Search</span>
+			</h5>
+		</nav>
+		<div class='nav2'>
+			<h5>
+				<span (click)='reversePhotos()' *ngIf="!unRatedOnly" >Rating {{reverse ? 'Up' : 'Down'}}</span>
+				<span (click)='ratedPhotos()' [class.blue]='!unRatedOnly && show === false'>Rated </span>
+				<span (click)='unRatedPhotos()' [class.blue]='unRatedOnly && show === false' >Unrated</span>
+				<span (click)='showAll()' [class.blue]='show'>Show All</span>
+			</h5>
+		</div>
+		<!-- Main -->
+		<div class="main">
+			<app-photo-list [sortedPhotos]='sortedPhotos' (detailView)="createDetail($event)" ></app-photo-list>
+		</div>
+		<!-- Footer -->
+		<!--<footer class='footer'></footer>-->
+	</div>
+	<app-photo-detail (closeDetailView)="closeDetail()" [photo]=photoDetail *ngIf='detail'></app-photo-detail>

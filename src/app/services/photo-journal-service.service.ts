@@ -29,13 +29,13 @@ export class PhotoJournalService{
       "url": "https://source.unsplash.com/_snqARKTgoc/",
       "title": "Interpid Bears",
       "notes": [],
-      "rating": 4
+      "rating": 5
     },
     {
       "url": "https://source.unsplash.com/14CsAc1hY1c/",
       "title": "",
       "notes": [],
-      "rating": 0
+      "rating": 5
 
     },
     {
