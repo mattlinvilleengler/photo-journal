@@ -1,9 +1,9 @@
 <div class='list-element'>
 	<img src={{photo.url}} (click)='createDetail(photo);'>
-	<h5 class='title '>{{photo.title.length > 0 ? photo.title : 'Untitled' }}</h5>
+	<h5 class='title '>{{photo.title ? photo.title : 'Untitled' }}</h5>
 	<app-stars class='stars fR' [editable]=false [stars]='photo.rating'></app-stars>
 	<div class='comment fL'>
-		<h5>{{photo.notes.length === 1 ? photo.notes.length + ' Note' : photo.notes.length + ' Notes' }}</h5>
+		<h5>{{notesLength === 1 ? notesLength + ' Note' : notesLength + ' Notes' }}</h5>
 	</div>
 </div>
 

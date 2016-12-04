@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ListElementComponent } from '../list-element/list-element.component';
 
 
@@ -6,11 +6,12 @@ import { ListElementComponent } from '../list-element/list-element.component';
   selector: 'app-photo-list',
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css'],
-  providers: [  ListElementComponent ]
+  providers: [ListElementComponent]
 })
 export class PhotoListComponent implements OnInit {
   @Output() detailView = new EventEmitter();
   @Input('sortedPhotos') sortedPhotos: any[];
+  sortedLength: number = 0;
   rating: {} = {
     0: "Unrated Photos",
     1: "1 Star Photos",
@@ -20,8 +21,9 @@ export class PhotoListComponent implements OnInit {
     5: "5 Star Photos"
   }
   ngOnInit() {
+
   }
-   createDetail(photo){
+  createDetail(photo) {
     this.detailView.emit(photo);
   }
 

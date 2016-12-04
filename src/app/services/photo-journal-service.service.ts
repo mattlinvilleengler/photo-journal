@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
+declare var firebase: any;
 
 @Injectable()
-export class PhotoJournalService{
+export class PhotoJournalService {
+  database = firebase.database();
 
   constructor() { }
 
-  public  getPhotos(){
-    return this.photos;
+  public sortPhotosAscending(arr) {
+    arr.sort(function (a, b) { return b.rating - a.rating });
+    return arr;
   }
-    public  sortPhotosAscending(arr){
-      arr.sort(function(a, b){return b.rating-a.rating});
-      return arr;
+  public sortPhotosDescending(arr) {
+    arr.sort(function (a, b) { return a.rating - b.rating });
+    return arr;
   }
-   public  sortPhotosDescending(arr){
-      arr.sort(function(a, b){return a.rating-b.rating});
-      return arr;
+  public updatePhoto(data) {
+    var key = data.UID;
+    delete data.UID;
+    firebase.database().ref('photos/' + key).set(data);
   }
-
+  public doStuff() {
+    //this.photos.forEach(p => {
+      //  firebase.database().ref('photos/').push(p);
+    //})
+  }
+/*
   photos: any =
   [
     {
@@ -81,6 +90,5 @@ export class PhotoJournalService{
       "rating": 2
     }
   ];
-
-
+*/
 }

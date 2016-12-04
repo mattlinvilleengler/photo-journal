@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PhotoListComponent } from '../app/components/photo-list/photo-list.component';
 import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 import { PhotoJournalService } from './services/photo-journal-service.service';
+declare var firebase: any;
 
 @Component({
   selector: 'app-root',
@@ -11,25 +12,38 @@ import { PhotoJournalService } from './services/photo-journal-service.service';
 
 })
 export class AppComponent {
+  database = firebase.database();
   detail: boolean = false;
   reverse: boolean = false;
   show: boolean = true;
   unRatedOnly: boolean = false;
   photoDetail: any = null;
-  photos: any[];
+  photos: any[]=[];
   sortedPhotos: any[];
 
   constructor(private PhotoJournalService: PhotoJournalService) {
   }
 
   ngOnInit() {
-    this.mainPhotos();
+   // this.PhotoJournalService.doStuff();
+    this.getPhotos();
   }
-  mainPhotos() {
-    this.photos = this.PhotoJournalService.getPhotos();
+  mainPhotos(photos) {
+    console.log(photos);
+    for(var key in photos){
+        photos[key].UID = key;
+        this.photos.push(photos[key]);
+    }
     this.photos = this.filterAscending(this.photos);
     this.sortedPhotos = this.subSortLists(this.photos);
   }
+  getPhotos(){
+    var me = this;
+    firebase.database().ref('photos/').on('value', function(snapshot){
+      me.mainPhotos(snapshot.val());
+    });
+  }
+
   subSortLists(arr) {
     var sorted = [[], [], [], [], [], []];
     arr.forEach(p => {

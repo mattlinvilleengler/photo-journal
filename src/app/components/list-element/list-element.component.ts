@@ -10,11 +10,14 @@ import { StarsComponent } from '../stars/stars.component';
 export class ListElementComponent implements OnInit {
   @Input('photo') photo: any;
   @Output() detailView = new EventEmitter();
-  
+  notesLength: number = 0;
+
   constructor() { }
 
   ngOnInit() {
-    if(this.photo.notes.length > 0){
+    console.log(this.photo)
+    if(this.photo.notes){
+      this.notesLength = this.photo.notes.length;
       this.photo.notes.forEach(n => {
         n.localDate = new Date(n.timestamp).toLocaleDateString();
       })

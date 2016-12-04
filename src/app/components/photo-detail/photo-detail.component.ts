@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StarsComponent } from '../stars/stars.component';
+import { PhotoJournalService } from '../../services/photo-journal-service.service';
 
 @Component({
   selector: 'app-photo-detail',
@@ -14,7 +15,8 @@ export class PhotoDetailComponent implements OnInit {
   detail:boolean =false;
   fullScrean:boolean =false;
 
-  constructor() { }
+  constructor(private PhotoJournalService: PhotoJournalService) {
+  }
 
   ngOnInit() {
     var me = this;

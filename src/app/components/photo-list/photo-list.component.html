@@ -9,8 +9,8 @@
 		</p>
 	</div>
 
-	<div class="sortedPhotos boxWidth" *ngFor="let sorted of sortedPhotos; let i = index" [class.dNone]='sorted.length < 1' 
-	[class.wide]="i === sortedPhotos.length">
+	<div class="sortedPhotos boxWidth" *ngFor="let sorted of sortedPhotos; let i = index; let l = last" [class.dNone]='sorted.length < 1' 
+	[class.wide]="l && i > 0">
 		<h1>{{ sorted.length > 0 ? rating[sorted[0].rating] : "" }}</h1>
 		<app-list-element (detailView)="createDetail($event)" class="list-element" *ngFor="let photo of sorted" [photo]=photo></app-list-element>
 	</div>
