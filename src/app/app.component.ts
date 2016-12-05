@@ -1,76 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { PhotoListComponent } from '../app/components/photo-list/photo-list.component';
 import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 import { PhotoJournalService } from './services/photo-journal-service.service';
-declare var firebase: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  viewProviders: [PhotoListComponent, PhotoDetailComponent]
+  viewProviders: [PhotoListComponent, PhotoDetailComponent],
+  providers: [ PhotoJournalService],
+
 
 })
 export class AppComponent {
-  database = firebase.database();
+  db:any;
   detail: boolean = false;
   reverse: boolean = false;
   show: boolean = true;
   unRatedOnly: boolean = false;
   photoDetail: any = null;
   photos: any[] = [];
-  sortedPhotos: any[];
-  filterDDL: any = false;
+  sortedPhotos: any[] = [];
+  filterDDL: boolean = false;
   ddShow: boolean = false;
   ddShowFull: boolean = false;
 
-
-  constructor(private PhotoJournalService: PhotoJournalService) {
+  constructor(private PhotoJournalService: PhotoJournalService, ChangeDetectorRef: ChangeDetectorRef) {
+    this.db = PhotoJournalService.getDB();
   }
 
   ngOnInit() {
-    // this.PhotoJournalService.doStuff();
     this.getPhotos();
-  }
-  mainPhotos(photos) {
-    this.photos = [];
-    for (var key in photos) {
-      photos[key].UID = key;
-      this.photos.push(photos[key]);
-    }
-    this.photos = this.filterAscending(this.photos);
-    this.sortedPhotos = this.subSortLists(this.photos);
-    console.log(this.sortedPhotos)
-    this.sortedPhotos.forEach(arr => { arr = this.PhotoJournalService.subSortPhotos(arr) });
-    console.log(this.sortedPhotos)
-
   }
   getPhotos() {
     var me = this;
-    firebase.database().ref('photos/').on('value', function (snapshot) {
-      me.mainPhotos(snapshot.val());
+    this.db.ref('photos/').on('value', function (snapshot) {
+      me.photos = me.PhotoJournalService.photoObjectToArray(snapshot.val());
+      me.sortedPhotos = me.PhotoJournalService.sortPhotos(me.photos, me.show, me.unRatedOnly, me.reverse);
+      me.refresh();
     });
   }
-
-  subSortLists(arr) {
-    var sorted = [[], [], [], [], [], []];
-    arr.forEach(p => {
-      if (this.show) {
-        sorted[p.rating].push(p);
-      } else if (this.unRatedOnly) {
-        if (p.rating < 1) {
-          sorted[p.rating].push(p);
-        }
-      } else if (!this.unRatedOnly) {
-        if (p.rating > 1) {
-          sorted[p.rating].push(p);
-        }
-      }
-    });
-    if (!this.reverse) {
-      sorted.reverse();
-    }
-    return sorted;
+  refresh(){
+   document.getElementById('refreshElement').click();
+  }
+  refreshView(){
+    
   }
   filterAscending(arr) {
     return this.PhotoJournalService.sortPhotosAscending(arr);
@@ -87,19 +61,22 @@ export class AppComponent {
     this.sortedPhotos.reverse();
   }
   ratedPhotos() {
+    this.showFilter(false);
     this.show = false;
     this.unRatedOnly = false;
-    this.sortedPhotos = this.subSortLists(this.photos);
+    this.sortedPhotos = this.PhotoJournalService.subSortLists(this.photos, this.show, this.unRatedOnly, this.reverse);
   }
   unRatedPhotos() {
+    this.showFilter(false);
     this.show = false;
     this.unRatedOnly = true;
-    this.sortedPhotos = this.subSortLists(this.photos);
+    this.sortedPhotos = this.PhotoJournalService.subSortLists(this.photos, this.show, this.unRatedOnly, this.reverse);
   }
   showAll() {
+    this.showFilter(false);
     this.show = true;
     this.unRatedOnly = false;
-    this.sortedPhotos = this.subSortLists(this.photos);
+    this.sortedPhotos = this.PhotoJournalService.subSortLists(this.photos, this.show, this.unRatedOnly, this.reverse);
   }
   closeDetail() {
     this.photoDetail = null;

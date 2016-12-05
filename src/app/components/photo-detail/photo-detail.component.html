@@ -1,23 +1,31 @@
+<!-- MASK -->
 <div class="mask" (click)="closeDetail();"></div>
+<!-- DETAILS -->
 <div class='detailHolder' [class.detailHolderWidth]='detail' [class.fullScreen]='fullScreen'>
+  <!-- UPPER TOOLBAR -->
 	<div class="toolbar">
 		<h5 style="color:#999;" (click)="closeDetail();">Close</h5>
 		<h5 (click)="fullScreen = !fullScreen">Full Screen</h5>
 	</div>
 	<div class='detail'>
+    <!-- IMG -->
 		<img src={{photo.url}}>
+    <!-- INNER DETAILS -->
 		<div class="info">
+      <!-- UPDATE TITLE AND RATING -->
 			<h5 class='title fL' (click)="showChangeTitle()" *ngIf="!editTitle">{{photo.title ? photo.title : 'Untitled' }}</h5>
 			<input id='textTitle' [(ngModel)]='photo.title' type="text" placeholder="Title" class='title fL editTitle' *ngIf="editTitle"/> 
-			<h5 class='title fL blue' (click)="editTitle = false;" *ngIf="editTitle">&#x2713;</h5>
+			<h5 class='title fL blue' (click)="updateTitle()" *ngIf="editTitle">&#x2713;</h5>
 			<app-stars class='stars fR' (updateRating)="updateRating($event) " [editable]=true [stars]='photo.rating'></app-stars>
       <br>
+      <!-- ADD NOTES -->
 			<h5 class="addNote" (click)="showAddNote()">Add Note</h5>
 			<div *ngIf="addNote" class="noteInput">
 				<textarea id='noteTextInput' rows = 4 [(ngModel)]='noteText' type=text placeHolder="Note Text" ></textarea>
 				<h5 (click)="updateNote()" class=''>Add</h5>
 				<h5 (click)="addNote = false; noteText = ''; " style="color:#999" class=''>Cancel</h5>
 			</div>
+      <!-- COMMENTS -->
 			<div class='comment ' *ngFor="let note of photo.notes; let i = index;">
 				<hr>
 				<h5>{{note.text}}</h5>

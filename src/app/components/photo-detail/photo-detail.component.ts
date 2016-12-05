@@ -30,7 +30,6 @@ export class PhotoDetailComponent implements OnInit {
       this.photo.title = "";
     }
   }
-
   closeDetail() {
     this.detail = false;
     this.fullScrean = false;
@@ -39,6 +38,10 @@ export class PhotoDetailComponent implements OnInit {
   updateRating(rating) {
     this.photo.rating = rating;
     this.PhotoJournalService.updatePhoto(this.photo);
+  }
+  updateTitle(){
+    this.PhotoJournalService.updatePhoto(this.photo);
+    this.editTitle = false;
   }
   updateNote() {
     if (this.noteText.length > 0) {
