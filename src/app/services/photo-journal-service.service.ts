@@ -15,80 +15,23 @@ export class PhotoJournalService {
     arr.sort(function (a, b) { return a.rating - b.rating });
     return arr;
   }
+  public subSortPhotos(arr) {
+    arr.sort(function (a, b) {
+      var nameA = a.title.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.title.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+    return arr;
+  }
   public updatePhoto(data) {
-    var key = data.UID;
-    delete data.UID;
-    firebase.database().ref('photos/' + key).set(data);
+    firebase.database().ref('photos/' + data.UID).set(data);
   }
-  public doStuff() {
-    //this.photos.forEach(p => {
-      //  firebase.database().ref('photos/').push(p);
-    //})
-  }
-/*
-  photos: any =
-  [
-    {
-      "url": "https://source.unsplash.com/H_M4dX_F1LQ/",
-      "title": "A Puffin",
-      "notes": [{ "timestamp": 1480377984598, "text": "This puffin looks rather stoic." }, { "timestamp": 1479801600000, "text": "This is an Atlantic Puffin." }],
-      "rating": 5
-    },
-    {
-      "url": "https://source.unsplash.com/_snqARKTgoc/",
-      "title": "Interpid Bears",
-      "notes": [],
-      "rating": 5
-    },
-    {
-      "url": "https://source.unsplash.com/14CsAc1hY1c/",
-      "title": "",
-      "notes": [],
-      "rating": 5
 
-    },
-    {
-      "url": "https://source.unsplash.com/t20pc32VbrU/",
-      "title": "A Breaching Whale",
-      "notes": [],
-      "rating": 3
-    },
-    {
-      "url": "https://source.unsplash.com/6UNL6Ghn_c/",
-      "title": "",
-      "notes": [],
-      "rating": 0
-    },
-    {
-      "url": "https://source.unsplash.com/ZnmrTUzFIks/",
-      "title": "",
-      "notes": [],
-      "rating": 0
-    },
-    {
-      "url": "https://source.unsplash.com/Vt0tkNf6r5Y/",
-      "title": "",
-      "notes": [],
-      "rating": 0
-    },
-    {
-      "url": "https://source.unsplash.com/3r0Kchy-F_A/",
-      "title": "",
-      "notes": [{ "timestamp": 1479456000000, "text": "This is very yellow." }],
-      "rating": 1
-    },
-    {
-      "url": "https://source.unsplash.com/7YfY61ILEwg/",
-      "title": "The Deadliest Frog",
-      "notes": [{ "timestamp": 1476946800000, "text": "Spotted in the forest." }, { "timestamp": 1477292400000, "text": "I think these are native to Columbia." }, { "timestamp": 1477378800000, "text": "This is a golden poison frog and should never be touched." }],
-      "rating": 1
-    },
-    {
-      "url": "https://source.unsplash.com/xqjO-lx39B4/",
-      "title": "not a yak",
-      "notes": [],
-      "rating": 2
-    }
-  ];
-*/
 }

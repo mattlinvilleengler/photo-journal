@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
 import { ListElementComponent } from '../list-element/list-element.component';
 
 
@@ -11,7 +11,8 @@ import { ListElementComponent } from '../list-element/list-element.component';
 export class PhotoListComponent implements OnInit {
   @Output() detailView = new EventEmitter();
   @Input('sortedPhotos') sortedPhotos: any[];
-  sortedLength: number = 0;
+  missingCount: number = 0;
+  isOdd: boolean = false;
   rating: {} = {
     0: "Unrated Photos",
     1: "1 Star Photos",
@@ -21,10 +22,29 @@ export class PhotoListComponent implements OnInit {
     5: "5 Star Photos"
   }
   ngOnInit() {
-
+  }
+  ngOnChanges() {
+    if (this.sortedPhotos) {
+      this.missingCount = this.count(this.sortedPhotos);
+      this.isOdd = this.odd(this.missingCount, this.sortedPhotos);
+    }
   }
   createDetail(photo) {
     this.detailView.emit(photo);
+  }
+  odd(n, x) {
+    var int = (x.length - n - 1) % 2;
+    return int ? true : false;
+  }
+  count(arr) {
+    var me = this;
+    var c = 0;
+    arr.forEach(ar => {
+      if (ar.length < 1) {
+        c++;
+      }
+    })
+    return c;
   }
 
 }

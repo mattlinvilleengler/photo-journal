@@ -1,6 +1,6 @@
-
-	<div class="container" [class.detailView]='detail'>
-		<!-- NAV -->
+<div class="container" [class.detailView]='detail'>
+	<!-- NAV -->
+	<div class="navContainer">
 		<nav class='nav'>
 			<h5 class="title">
 				Photo Journal
@@ -11,17 +11,21 @@
 		</nav>
 		<div class='nav2'>
 			<h5>
-				<span (click)='reversePhotos()' *ngIf="!unRatedOnly" >Rating {{reverse ? 'Up' : 'Down'}}</span>
-				<span (click)='ratedPhotos()' [class.blue]='!unRatedOnly && show === false'>Rated </span>
-				<span (click)='unRatedPhotos()' [class.blue]='unRatedOnly && show === false' >Unrated</span>
-				<span (click)='showAll()' [class.blue]='show'>Show All</span>
+				<span (click)='reversePhotos()'>Rating&#8645;</span>
+				<span (click)='showFilter(!filterDDL)'>Filter By <span style="font-size:9px; margin:2px">&#x25BC;</span></span>
+				<div class="filterDDL" *ngIf='filterDDL' [class.ddShow]='ddShow' [class.ddShowFull]='ddShowFull'>
+					<span (click)='showAll()' [class.blue]='show'>Show All </span>
+					<span (click)='ratedPhotos()' [class.blue]='!unRatedOnly && show === false'>Show Rated Only </span>
+					<span (click)='unRatedPhotos()' [class.blue]='unRatedOnly && show === false'>Show Unrated Only</span>
+				</div>
 			</h5>
 		</div>
-		<!-- Main -->
-		<div class="main">
-			<app-photo-list [sortedPhotos]='sortedPhotos' (detailView)="createDetail($event)" ></app-photo-list>
-		</div>
-		<!-- Footer -->
-		<!--<footer class='footer'></footer>-->
 	</div>
-	<app-photo-detail (closeDetailView)="closeDetail()" [photo]=photoDetail *ngIf='detail'></app-photo-detail>
+	<!-- Main -->
+	<div class="main">
+		<app-photo-list [sortedPhotos]='sortedPhotos' (detailView)="createDetail($event)"></app-photo-list>
+	</div>
+	<!-- Footer -->
+	<!--<footer class='footer'></footer>-->
+</div>
+<app-photo-detail (closeDetailView)="closeDetail()" [photo]=photoDetail *ngIf='detail'></app-photo-detail>

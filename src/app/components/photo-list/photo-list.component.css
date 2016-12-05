@@ -10,7 +10,7 @@
  width:90%;
 }
 .sortedPhotos{
-    margin:1%;
+    margin:.5%;
     padding:10px;
     background-color: #efefef;
     width:98%; 
@@ -73,7 +73,7 @@
 
 
 .description{
-    margin:1%;
+    margin:.5%;
     padding:40px;
     background-color: #efefef;
     float:left;

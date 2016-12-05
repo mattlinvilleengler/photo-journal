@@ -15,7 +15,6 @@ export class ListElementComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.photo)
     if(this.photo.notes){
       this.notesLength = this.photo.notes.length;
       this.photo.notes.forEach(n => {

@@ -21,13 +21,13 @@
     margin:5px 0;
     max-width: 90%;
     color: #666;
+    word-break: break-all;
 }
 .list-element .stars{
     display: inline;
 }
 .list-element .comment{
     color: #0070c9;
-    cursor: pointer;
     display: inline;
 }
 

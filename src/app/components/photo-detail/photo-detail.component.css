@@ -50,7 +50,7 @@
 }
 
 .fullScreen{
-    width:100%;
+    width:100%!important;
 }
 .toolbar{
     height:40px;
@@ -74,8 +74,22 @@
     background-color: white;
     border-radius:2px;
 }
+.detail .blue{
+    color: #0070c9!important;    
+}
+.detail .editTitle{
+    border: none;
+    color: #333;
+    font-size:22px;
+    width:30%;
+    cursor: auto!important;
+}
+.detail .editTitle:focus{
+    outline:none
+}
 .detail h5{
     margin-top:5px;
+    
 }
 .detail .fL{
     float:left;
@@ -95,6 +109,8 @@
     color: #333;
     font-size:22px;
     display: inline;
+    cursor: pointer;
+        word-break: break-all;
 }
 .detail .stars{
     display: inline;
@@ -103,11 +119,15 @@
     color: #0070c9;
     cursor: pointer;
     clear:both;
+    display:inline-block;
+    float:left;
+    clear:both;
+    margin-bottom:10px;
 }
 .detail .comment{
     color: #666;
     clear:both;
-    margin:10px 0 20px 0;
+    margin:20px 0 20px 0;
 }
 .detail .comment h5,h6{
  margin: 3px 0px;
@@ -122,3 +142,27 @@ cursor: pointer;
     padding-top:10px;
     min-height:55px;
 }
+.detail .noteInput{
+    width:100%;
+    color: #666;
+    clear:both;
+    margin:0 0 40px 0;
+}
+.detail .noteInput textarea{
+    width:97%;
+    border-radius: 4px;
+    border-color:#999;
+    color: #666;
+    padding:5px 5px 5px 10px;
+    font-size:15px;
+}
+.detail .noteInput textarea:focus{
+    outline: 0px!important;
+}
+.detail .noteInput h5{
+    margin: 5px 1px 5px 15px;
+    float:right;
+    color: #0070c9;
+    cursor: pointer;
+}
+

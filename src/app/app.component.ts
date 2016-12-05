@@ -18,28 +18,36 @@ export class AppComponent {
   show: boolean = true;
   unRatedOnly: boolean = false;
   photoDetail: any = null;
-  photos: any[]=[];
+  photos: any[] = [];
   sortedPhotos: any[];
+  filterDDL: any = false;
+  ddShow: boolean = false;
+  ddShowFull: boolean = false;
+
 
   constructor(private PhotoJournalService: PhotoJournalService) {
   }
 
   ngOnInit() {
-   // this.PhotoJournalService.doStuff();
+    // this.PhotoJournalService.doStuff();
     this.getPhotos();
   }
   mainPhotos(photos) {
-    console.log(photos);
-    for(var key in photos){
-        photos[key].UID = key;
-        this.photos.push(photos[key]);
+    this.photos = [];
+    for (var key in photos) {
+      photos[key].UID = key;
+      this.photos.push(photos[key]);
     }
     this.photos = this.filterAscending(this.photos);
     this.sortedPhotos = this.subSortLists(this.photos);
+    console.log(this.sortedPhotos)
+    this.sortedPhotos.forEach(arr => { arr = this.PhotoJournalService.subSortPhotos(arr) });
+    console.log(this.sortedPhotos)
+
   }
-  getPhotos(){
+  getPhotos() {
     var me = this;
-    firebase.database().ref('photos/').on('value', function(snapshot){
+    firebase.database().ref('photos/').on('value', function (snapshot) {
       me.mainPhotos(snapshot.val());
     });
   }
@@ -59,7 +67,7 @@ export class AppComponent {
         }
       }
     });
-    if(!this.reverse){
+    if (!this.reverse) {
       sorted.reverse();
     }
     return sorted;
@@ -96,5 +104,17 @@ export class AppComponent {
   closeDetail() {
     this.photoDetail = null;
     this.detail = false;
+  }
+  showFilter(show) {
+    var me = this;
+    if (show) {
+      me.filterDDL = true;
+      setTimeout(function () { me.ddShow = true }, 1)
+      setTimeout(function () { me.ddShowFull = true }, 100)
+    } else {
+      me.ddShowFull = false
+      setTimeout(function () { me.ddShow = false }, 1)
+      setTimeout(function () { me.filterDDL = false }, 190)
+    }
   }
 }
