@@ -2,7 +2,7 @@
 Built with Angular 2 and Firebase
 
 ## Access
-Access Live @
+Access Live @ https://photojournal-3894c.firebaseapp.com/
 
 ## Install
 Clone & NPM Install
